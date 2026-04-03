@@ -1,0 +1,204 @@
+/* ============================================================
+   1. Global Styles
+   ============================================================ */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dcdccb;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ============================================================
+   2. Manual Book Shell
+   ============================================================ */
+.manual-book {
+  position: relative;
+  width: 90vw;
+  max-width: 800px;
+  height: 80vh;
+  max-height: 600px;
+  background-color: #f4f4f0;
+  border: 3px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 10px 10px 0px #1a1a1a;
+  overflow: hidden;
+}
+
+/* ============================================================
+   3. Page Container
+   ============================================================ */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  display: none;
+  background-color: #f4f4f0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page.active {
+  display: flex;
+}
+
+/* ============================================================
+   4. Buttons
+   ============================================================ */
+button {
+  padding: 10px 20px;
+  font-family: inherit;
+  font-weight: bold;
+  border: 2px solid #1a1a1a;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #1a1a1a;
+  color: #f4f4f0;
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* ============================================================
+   5. Page 01 — Home Canvas
+   ============================================================ */
+#page-01 {
+  position: relative;
+}
+
+.big-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-element {
+  position: absolute;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.2s;
+}
+
+.home-element:hover {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.how-it-works { top: 10%;    right: 8%;   font-size: 20px; border-bottom: 2px solid #1a1a1a; }
+.dida-text    { top: 15%;    left: 12%;   font-size: 24px; transform: rotate(-90deg); }
+.ditto-text   { bottom: 12%; left: 22%;   font-size: 24px; }
+.phone-icon   { bottom: 8%;  left: 8%;    font-size: 40px; }
+.ddd-tag      { bottom: 8%;  right: 25%;  font-size: 14px; color: #666; }
+.do-text      { bottom: 25%; right: 10%;  font-size: 28px; font-style: italic; }
+
+.spec-box { top: 12%; left: 50%; transform: translateX(-50%); text-align: center; }
+.spec-stack {
+  width: 50px;
+  height: 65px;
+  border: 2px solid #1a1a1a;
+  background: white;
+  margin: 0 auto 8px;
+  box-shadow: 4px -4px 0 white, 4px -4px 0 #1a1a1a, 8px -8px 0 white, 8px -8px 0 #1a1a1a;
+}
+
+.scroll-text-zone {
+  top: 38%;
+  left: 12%;
+  width: 180px;
+  height: 100px;
+  border: 2px solid #1a1a1a;
+  padding: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.scroll-content {
+  animation: autoScroll 12s linear infinite;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ts-circle {
+  bottom: 15%;
+  right: 15%;
+  width: 65px;
+  height: 65px;
+  border: 2px dashed #1a1a1a;
+  border-radius: 50%;
+}
+
+/* ============================================================
+   6. Portfolio Grid (Page 03)
+   ============================================================ */
+.portfolio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
+  padding-bottom: 40px;
+}
+
+.portfolio-item {
+  background: white;
+  padding: 10px 10px 25px 10px;
+  border: 2px solid #1a1a1a;
+  width: 160px;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.1);
+  transform: rotate(calc(var(--r, 0) * 1deg));
+  transition: all 0.3s;
+}
+
+.portfolio-item:hover {
+  transform: rotate(0deg) scale(1.1);
+  box-shadow: 10px 10px 0px #1a1a1a;
+  z-index: 10;
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #eee;
+  margin-bottom: 8px;
+}
+
+.portfolio-item p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ============================================================
+   7. Animations
+   ============================================================ */
+@keyframes autoScroll {
+  0%   { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
+}

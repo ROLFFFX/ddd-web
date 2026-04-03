@@ -1,0 +1,195 @@
+/* ============================================================
+   1. 全局基础设定 (Global Styles)
+   控制整个网页的背景、字体和居中逻辑
+   ============================================================ */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #dcdccb; /* 桌面底色 */
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 说明书物理外壳 */
+.manual-book {
+    position: relative;
+    width: 90vw;
+    max-width: 800px;
+    height: 80vh;
+    max-height: 600px;
+    background-color: #f4f4f0; /* 纸张色 */
+    border: 3px solid #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 10px 10px 0px #1a1a1a;
+    overflow: hidden;
+}
+
+/* 每一页的通用容器 */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    display: none; /* 默认隐藏，由 JS 控制显示 */
+    background-color: #f4f4f0;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page.active {
+    display: flex; /* 激活状态显示 */
+}
+
+/* 通用按钮基础样式 */
+button {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-weight: bold;
+    border: 2px solid #1a1a1a;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #1a1a1a;
+    color: #f4f4f0;
+}
+
+/* 右上角统一的返回按钮 */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+/* ============================================================
+   2. 首页自由画布 (Page 01 - Home Canvas)
+   根据你的手绘草图进行的绝对定位
+   ============================================================ */
+#page-01 {
+    position: relative;
+}
+
+/* 中央大 Logo 背景字母 */
+.big-logo-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    font-size: 120px;
+    font-weight: 900;
+    line-height: 0.8;
+    color: rgba(0,0,0,0.05);
+    pointer-events: none; /* 穿透点击，不挡按钮 */
+    z-index: 1;
+}
+
+/* 首页所有散落元素的通用类 */
+.home-element {
+    position: absolute;
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.2s;
+}
+.home-element:hover {
+    transform: scale(1.1) rotate(-3deg);
+}
+
+/* --- 以下为草图对应位置微调 --- */
+.how-it-works { top: 10%; right: 8%; font-size: 20px; border-bottom: 2px solid #1a1a1a; }
+.dida-text    { top: 15%; left: 12%; font-size: 24px; transform: rotate(-90deg); }
+.ditto-text   { bottom: 12%; left: 22%; font-size: 24px; }
+.phone-icon   { bottom: 8%; left: 8%; font-size: 40px; }
+.ddd-tag      { bottom: 8%; right: 25%; font-size: 14px; color: #666; }
+.do-text      { bottom: 25%; right: 10%; font-size: 28px; font-style: italic; }
+
+/* Specification 堆叠纸张效果 */
+.spec-box { top: 12%; left: 50%; transform: translateX(-50%); text-align: center; }
+.spec-stack {
+    width: 50px; height: 65px; border: 2px solid #1a1a1a;
+    background: white; margin: 0 auto 8px;
+    box-shadow: 4px -4px 0 white, 4px -4px 0 #1a1a1a, 8px -8px 0 white, 8px -8px 0 #1a1a1a;
+}
+
+/* Why ddd? 滚动文字区 */
+.scroll-text-zone {
+    top: 38%; left: 12%; width: 180px; height: 100px;
+    border: 2px solid #1a1a1a; padding: 10px;
+    overflow: hidden; background: white;
+}
+.scroll-content {
+    animation: autoScroll 12s linear infinite;
+    font-size: 13px; line-height: 1.5;
+}
+
+/* Trouble Shooting 圆圈 */
+.ts-circle {
+    bottom: 15%; right: 15%;
+    width: 65px; height: 65px;
+    border: 2px dashed #1a1a1a; /* 用虚线增加手绘感 */
+    border-radius: 50%;
+}
+
+/* ============================================================
+   3. 作品集页面 (Page 03 - Portfolio Grid)
+   拍立得贴纸风格
+   ============================================================ */
+.portfolio-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+    margin-top: 20px;
+    overflow-y: auto; /* 内容多时可滚动 */
+    padding-bottom: 40px;
+}
+
+.portfolio-item {
+    background: white;
+    padding: 10px 10px 25px 10px;
+    border: 2px solid #1a1a1a;
+    width: 160px;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+    transform: rotate(calc(var(--r, 0) * 1deg));
+    transition: all 0.3s;
+}
+
+.portfolio-item:hover {
+    transform: rotate(0deg) scale(1.1);
+    box-shadow: 10px 10px 0px #1a1a1a;
+    z-index: 10;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #eee;
+    margin-bottom: 8px;
+}
+
+.portfolio-item p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   4. 动画定义 (Animations)
+   ============================================================ */
+@keyframes autoScroll {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}
